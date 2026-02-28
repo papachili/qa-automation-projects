@@ -34,11 +34,13 @@ Key features:
 playwright-python/
 ├── pages/
 │ ├── checkboxes_page.py # Page Object for the checkboxes page
+│ ├── dropdown_page.py # Page Object for the dropdown page
 │ ├── hovers_page.py # Page Object for the hovers page
 │ └── login_page.py # Page Object for the login page
 ├── tests/
 │ ├── conftest.py # Shared pytest configuration for browser and page fixtures
 │ ├── test_checkboxes.py # Test script for checkboxes functionality
+│ ├── test_dropdown.py # Test script for dropdown functionality
 │ ├── test_hovers.py # Test script for hover functionality
 │ └── test_login.py # Test script for login functionality
 ├── requirements.txt # Dependencies for the project
