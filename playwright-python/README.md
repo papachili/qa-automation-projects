@@ -36,12 +36,14 @@ playwright-python/
 │ ├── hovers_page.py # Page Object for the hovers page
 │ └── login_page.py # Page Object for the login page
 ├── tests/
+│ ├── conftest.py # Shared pytest configuration that sets up test fixtures for browser and page usage across multiple test scripts
 │ ├── test_hovers.py # Test script for hover functionality
 │ └── test_login.py # Test script for login functionality
 ├── requirements.txt # Dependencies for the project
 ├── pytest.ini # Optional pytest configuration
 ├── .gitignore # Files and directories to ignore in version control
 └── README.md # Project overview and documentation
+└── LICENSE.txt # Project License
 ```
 
 ---
@@ -86,32 +88,34 @@ pytest tests/
 pytest tests/test_hovers.py
 ```
 
-Page Object Model
-The project employs Page Object Model (POM) to enhance readability and maintainability.
+## Page Object Model
 
+The project employs Page Object Model (POM) to enhance readability and maintainability.
+f.e
 pages/hovers_page.py: Encapsulates locators and actions for the hover page.
 Tests interact with the page through this abstraction.
 
-Example usage:
-Copy
-Run
+### Example usage:
+
+```
 from pages.hovers_page import HoversPage
 
 def test_hovers(page):
-hover_page = HoversPage(page)
-hover_page.goto() # ... test steps ...
+    hover_page = HoversPage(page)
+    hover_page.goto()
+    # ... test steps ...
+```
 
-Contributing
+## Contributing
+
 Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request.
-Guidelines:
+
+## Guidelines
 
 Follow PEP8 style.
 Write clear, descriptive commit messages.
 Add new tests with proper page objects.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## License
 
-```
-
-```
+This project is licensed under the MIT License. See the [MIT License](https://github.com/papachili/qa-automation-projects/blob/main/playwright-python/LICENSE.txt) file for details.
