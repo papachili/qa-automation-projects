@@ -30,8 +30,7 @@ Key features:
 
 ## Test Structure
 
-# Project Structure
-
+```plaintext
 playwright-python/
 ├── pages/
 │ ├── hovers_page.py # Page Object for the hovers page
@@ -43,6 +42,7 @@ playwright-python/
 ├── pytest.ini # Optional pytest configuration
 ├── .gitignore # Files and directories to ignore in version control
 └── README.md # Project overview and documentation
+```
 
 ---
 
@@ -53,32 +53,38 @@ playwright-python/
 - Python 3.7+
 - pip (Python package installer)
 
-### Install dependencies
+### Install dependencies from requirements.txt
 
-```bash
+```
+pip install -r requirements.txt
+```
+
+### Or manually
+
+```
 pip install playwright pytest
 playwright install
-      Download and install browser engines
-          Copy
-          Run
-          python -m playwright install
+```
 
-Running Tests
-Run all tests
-          Copy
-          Run
-          pytest tests/
-      Run specific test file
-          Copy
-          Run
-          pytest tests/test_hovers.py
-      Additional options
+### Download and install browser engines
 
-Run tests with verbose output:
+```
+python -m playwright install
+```
 
-          Copy
-          Run
-          pytest -v
+### Running Tests
+
+#### Run all tests
+
+```
+pytest tests/
+```
+
+#### Run specific test file
+
+```
+pytest tests/test_hovers.py
+```
 
 Page Object Model
 The project employs Page Object Model (POM) to enhance readability and maintainability.
@@ -87,14 +93,13 @@ pages/hovers_page.py: Encapsulates locators and actions for the hover page.
 Tests interact with the page through this abstraction.
 
 Example usage:
-          Copy
-          Run
-          from pages.hovers_page import HoversPage
+Copy
+Run
+from pages.hovers_page import HoversPage
 
 def test_hovers(page):
-    hover_page = HoversPage(page)
-    hover_page.goto()
-    # ... test steps ...
+hover_page = HoversPage(page)
+hover_page.goto() # ... test steps ...
 
 Contributing
 Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request.
@@ -104,7 +109,9 @@ Follow PEP8 style.
 Write clear, descriptive commit messages.
 Add new tests with proper page objects.
 
-
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+```
+
 ```
