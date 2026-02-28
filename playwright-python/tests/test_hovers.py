@@ -1,7 +1,5 @@
 import pytest
-from playwright.sync_api import sync_playwright
-
-HOVERS_URL = "https://the-internet.herokuapp.com/hovers"
+from pages.hovers_page import HoversPage
 
 
 def test_hovers(page):
@@ -9,20 +7,18 @@ def test_hovers(page):
     Test the hover functionality on all figures, verifying captions, profile links, and navigation.
     """
     # Navigate to the hover page
-    page.goto(HOVERS_URL)
+    hover_page = HoversPage(page)
+    hover_page.goto()
 
     # Locate all figure elements
-    figures = page.locator("div.figure")
-    count = figures.count()
+    count = hover_page.get_figure_count()
 
     for i in range(count):
-        figure = figures.nth(i)
         # Hover over the figure to reveal caption and profile link
-        figure.hover()
+        hover_page.hover_over_figure(i)
 
         # Locate caption and profile link within the figure
-        caption = figure.locator("div.figcaption h5")
-        profile_link = figure.locator("a", has_text="View profile")
+        caption, profile_link = hover_page.get_caption_and_profile_link(i)
 
         # Wait for caption and profile link to become visible
         caption.wait_for(state="visible", timeout=5000)
