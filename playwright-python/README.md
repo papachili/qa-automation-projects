@@ -33,10 +33,12 @@ Key features:
 ```plaintext
 playwright-python/
 ├── pages/
+│ ├── checkboxes_page.py # Page Object for the checkboxes page
 │ ├── hovers_page.py # Page Object for the hovers page
 │ └── login_page.py # Page Object for the login page
 ├── tests/
-│ ├── conftest.py # Shared pytest configuration that sets up test fixtures for browser and page usage across multiple test scripts
+│ ├── conftest.py # Shared pytest configuration for browser and page fixtures
+│ ├── test_checkboxes.py # Test script for checkboxes functionality
 │ ├── test_hovers.py # Test script for hover functionality
 │ └── test_login.py # Test script for login functionality
 ├── requirements.txt # Dependencies for the project
@@ -90,12 +92,32 @@ pytest tests/test_hovers.py
 
 ## Page Object Model
 
-The project employs Page Object Model (POM) to enhance readability and maintainability.
-f.e
-pages/hovers_page.py: Encapsulates locators and actions for the hover page.
-Tests interact with the page through this abstraction.
+The project utilizes the Page Object Model (POM) design pattern to improve the readability and maintainability of test code. This approach involves creating a separate class for each page, encapsulating the locators and actions associated with that page (e.g., pages/hovers_page.py).
+By interacting with pages through these abstractions, tests become more concise, flexible, and easier to maintain, reducing the likelihood of brittle test code that's tied to implementation details.
 
 ### Example usage:
+
+###### hovers_page.py
+
+```
+from playwright.sync_api import Page
+
+
+class HoversPage:
+    def __init__(self, page: Page):
+        self.page = page
+        self.url = "https://the-internet.herokuapp.com/hovers"
+        self.figure_locator = self.page.locator("div.figure")
+
+    def goto(self):
+        self.page.goto(self.url)
+
+    # ... additional code ...
+
+
+```
+
+###### test_hovers.py
 
 ```
 from pages.hovers_page import HoversPage
@@ -103,7 +125,8 @@ from pages.hovers_page import HoversPage
 def test_hovers(page):
     hover_page = HoversPage(page)
     hover_page.goto()
-    # ... test steps ...
+
+    # ... additional test steps ...
 ```
 
 ## Contributing
