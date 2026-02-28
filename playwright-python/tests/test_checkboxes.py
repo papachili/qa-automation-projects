@@ -17,4 +17,4 @@ def test_checkboxes(page):
     checkboxes_page.click_first_checkbox()
     assert checkboxes_page.checkboxes.nth(0).is_checked()
     checkboxes_page.click_second_checkbox()
-    assert not checkboxes_page.checkboxes.nth(0).is_checked()
+    assert not checkboxes_page.checkboxes.nth(1).is_checked()
