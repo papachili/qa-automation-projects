@@ -16,8 +16,3 @@ def page(browser):
     page = context.new_page()
     yield page
     context.close()
-
-
-@pytest.fixture
-def login_url():
-    return "https://the-internet.herokuapp.com/login"

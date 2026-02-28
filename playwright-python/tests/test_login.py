@@ -24,7 +24,7 @@ def test_login_and_logout(page):
     page.click('a[href="/logout"]')
 
     # Verify that we are back on the login page
-    assert page.url == "https://the-internet.herokuapp.com/login"
+    assert page.url == LOGIN_URL
     # Check for logout success message
     assert page.locator('.flash.success').is_visible()
     assert "You logged out of the secure area!" in page.inner_text(
