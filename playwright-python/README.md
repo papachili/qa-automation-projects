@@ -1,6 +1,6 @@
 # Playwright Automation Tests
 
-This project contains automated UI tests using [Playwright](https://playwright.dev/), Python, and pytest. It focuses on verifying various functionalities of "The Internet Herokuapp" site. This project is intended for training purposes to demonstrate automation testing best practices.
+This project contains automated UI tests using [Playwright](https://playwright.dev/), Python, and pytest. It focuses on verifying various functionalities of [The Internet Herokuapp](https://the-internet.herokuapp.com/) site. This project is intended for training purposes to demonstrate automation testing best practices.
 
 ---
 
