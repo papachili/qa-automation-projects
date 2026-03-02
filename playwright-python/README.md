@@ -93,6 +93,20 @@ pytest tests/
 pytest tests/test_hovers.py
 ```
 
+#### Run test(s) with tracing
+
+```
+pytest tests/ --tracing=on
+```
+
+#### Run test(s) with debug
+
+```
+DEBUG
+$env:PWDEBUG=1
+pytest -s test_example.py
+```
+
 ## Page Object Model
 
 The project utilizes the Page Object Model (POM) design pattern to improve the readability and maintainability of test code. This approach involves creating a separate class for each page, encapsulating the locators and actions associated with that page (e.g., pages/hovers_page.py).
