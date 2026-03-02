@@ -69,6 +69,7 @@ pip install -r requirements.txt
 
 ```
 pip install playwright pytest
+pip install pytest-html
 playwright install
 ```
 
