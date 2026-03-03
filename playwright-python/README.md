@@ -36,13 +36,15 @@ playwright-python/
 │ ├── checkboxes_page.py # Page Object for the checkboxes page
 │ ├── dropdown_page.py # Page Object for the dropdown page
 │ ├── hovers_page.py # Page Object for the hovers page
-│ └── login_page.py # Page Object for the login page
+│ ├── login_page.py # Page Object for the login page
+│ └── status_codes_page.py # Page Object for the status codes page
 ├── tests/
 │ ├── conftest.py # Shared pytest configuration for browser and page fixtures
 │ ├── test_checkboxes.py # Test script for checkboxes functionality
 │ ├── test_dropdown.py # Test script for dropdown functionality
 │ ├── test_hovers.py # Test script for hover functionality
-│ └── test_login.py # Test script for login functionality
+│ ├── test_login.py # Test script for login functionality
+│ └── test_status_codes.py # Test script for status codes
 ├── requirements.txt # Dependencies for the project
 ├── pytest.ini # Optional pytest configuration
 ├── .gitignore # Files and directories to ignore in version control
