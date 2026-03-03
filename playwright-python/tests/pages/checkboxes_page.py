@@ -1,5 +1,4 @@
 from playwright.sync_api import sync_playwright
-from typing import List
 
 
 class CheckboxesPage:
@@ -11,7 +10,7 @@ class CheckboxesPage:
         self.page.goto(self.url)
 
     @property
-    def checkboxes(self) -> Locator:
+    def checkboxes(self):
         return self.page.locator("#checkboxes input")
 
     def click_first_checkbox(self):
@@ -21,3 +20,4 @@ class CheckboxesPage:
     def click_second_checkbox(self):
         """Click the second checkbox."""
         self.checkboxes.nth(1).click()
+
