@@ -10,6 +10,7 @@ This project contains automated UI tests using [Playwright](https://playwright.d
 - [Test Structure](#test-structure)
 - [Setup & Installation](#setup--installation)
 - [Running Tests](#running-tests)
+- [Viewing Reports](#viewing-reports)
 - [Page Object Model](#page-object-model)
 - [Contributing](#contributing)
 - [License](#license)
@@ -85,27 +86,27 @@ playwright install
 python -m playwright install
 ```
 
-### Running Tests
+## Running Tests
 
-#### Run all tests
+### Run all tests
 
 ```
 pytest tests/
 ```
 
-#### Run specific test file
+### Run specific test file
 
 ```
 pytest tests/test_hovers.py
 ```
 
-#### Run test(s) with tracing
+### Run test(s) with tracing
 
 ```
 pytest tests/ --tracing=on
 ```
 
-#### Run test(s) with debug
+### Run test(s) with debug
 
 ```
 DEBUG
@@ -113,9 +114,31 @@ $env:PWDEBUG=1
 pytest -s test_example.py
 ```
 
+## Test Reports
+
+This project uses pytest-html to generate detailed HTML reports for test execution. Reports are configured in **pytest.ini** with the following options:
+
+```
+addopts = --headed -v --html=test-reports/report.html --self-contained-html
+```
+
+### Viewing Reports
+
+After running your tests with pytest, an HTML report will be generated at **test-reports/report.html**.
+Open this file in your browser to view a comprehensive report of test results, including passed, failed, and skipped tests, along with additional details like screenshots (if configured).
+
+### Regenerating Reports
+
+To regenerate the report, simply run:
+```
+pytest
+```
+
+The report will be automatically updated at the specified location.
+
 ## Page Object Model
 
-The project utilizes the Page Object Model (POM) design pattern to improve the readability and maintainability of test code. This approach involves creating a separate class for each page, encapsulating the locators and actions associated with that page (e.g., pages/hovers_page.py).
+The project utilizes the **Page Object Model (POM)** design pattern to improve the readability and maintainability of test code. This approach involves creating a separate class for each page, encapsulating the locators and actions associated with that page (e.g., **pages/hovers_page.py**).
 By interacting with pages through these abstractions, tests become more concise, flexible, and easier to maintain, reducing the likelihood of brittle test code that's tied to implementation details.
 
 ### Example usage:
