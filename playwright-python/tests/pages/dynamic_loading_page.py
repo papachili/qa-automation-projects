@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright, expect
 
 
 class DynamicLoadingPage:
-    def __init__(self, page):
+    def __init__(self, page: Page):
         self.page = page
         self.url = "https://the-internet.herokuapp.com/dynamic_loading"
         self.loading_indicator = self.page.locator("#loading").get_by_role(

@@ -2,7 +2,7 @@ import pytest
 from pages.hovers_page import HoversPage
 
 
-def test_hovers(page):
+def test_hovers(page: Page):
     """
     Test the hover functionality on all figures, verifying captions, profile links, and navigation.
     """

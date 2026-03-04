@@ -2,7 +2,7 @@ import pytest
 from pages.checkboxes_page import CheckboxesPage
 
 
-def test_checkboxes(page):
+def test_checkboxes(page: Page):
     """
     Test the checkboxes page, verifying initial state and checkbox click behavior.
     """

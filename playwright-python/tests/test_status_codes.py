@@ -6,7 +6,7 @@ from pages.status_codes_page import StatusCodesPage
 EXPECTED_STATUS_CODES = ["200", "301", "404", "500"]
 
 
-def test_status_codes(page):
+def test_status_codes(page: Page):
     """
     Test the status codes page by verifying that clicking on each status code link
     navigates to the correct page displaying the expected status code message.
@@ -26,7 +26,7 @@ def test_status_codes(page):
         page.go_back()
 
 
-def test_status_codes_and_clik_here_link(page):
+def test_status_codes_and_clik_here_link(page: Page):
     """
     Test the status codes page by verifying that clicking on each status code link
     navigates to the correct page and then clicking the 'click here' link returns to the main page.

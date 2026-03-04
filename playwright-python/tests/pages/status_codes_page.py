@@ -2,8 +2,8 @@ from playwright.sync_api import sync_playwright
 
 
 class StatusCodesPage:
-    def __init__(self, Page):
-        self.page = Page
+    def __init__(self, page: Page):
+        self.page = page
         self.url = "https://the-internet.herokuapp.com/status_codes"
 
     def goto(self):

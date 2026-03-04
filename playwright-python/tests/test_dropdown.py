@@ -2,7 +2,7 @@ import pytest
 from pages.dropdown_page import DropdownPage
 
 
-def test_dropdown_with_select_option(page):
+def test_dropdown_with_select_option(page: Page):
     """
     Test selecting options directly using the select_option method
     """
@@ -23,7 +23,7 @@ def test_dropdown_with_select_option(page):
     assert dropdown_page.get_dropdown_value() == "2"
 
 
-def test_dropdown_with_keyboard(page):
+def test_dropdown_with_keyboard(page: Page):
     """
     Test interacting with the dropdown using keyboard navigation
     """

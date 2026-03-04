@@ -20,4 +20,3 @@ class CheckboxesPage:
     def click_second_checkbox(self):
         """Click the second checkbox."""
         self.checkboxes.nth(1).click()
-

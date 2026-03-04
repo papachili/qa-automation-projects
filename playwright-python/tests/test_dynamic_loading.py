@@ -1,6 +1,6 @@
+import pytest
 from pages.dynamic_loading_page import DynamicLoadingPage
 from playwright.sync_api import expect
-import pytest
 
 
 TIMEOUT = 10000

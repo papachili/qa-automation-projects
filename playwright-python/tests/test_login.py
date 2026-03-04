@@ -2,7 +2,7 @@ import pytest
 from pages.login_page import LogInPage
 
 
-def test_login_and_logout(page):
+def test_login_and_logout(page: Page):
     """
     Test a full login and logout cycle with valid credentials.
     """
@@ -24,7 +24,7 @@ def test_login_and_logout(page):
     assert "You logged out of the secure area!" in login_page.get_success_message()
 
 
-def test_good_username_wrong_password(page):
+def test_good_username_wrong_password(page: Page):
     """
     Test login attempt with correct username but incorrect password.
     Expect an invalid password error.
@@ -39,7 +39,7 @@ def test_good_username_wrong_password(page):
     assert "Your password is invalid!" in login_page.get_error_message()
 
 
-def test_wrong_login(page):
+def test_wrong_login(page: Page):
     """
     Test login attempt with incorrect username and password.
     Expect an invalid username error.
@@ -54,7 +54,7 @@ def test_wrong_login(page):
     assert "Your username is invalid!" in login_page.get_error_message()
 
 
-def test_empty_credentials(page):
+def test_empty_credentials(page: Page):
     """
     Test login attempt with empty username and password fields.
     Expect an error indicating invalid username or password.
@@ -69,7 +69,7 @@ def test_empty_credentials(page):
     assert "Your username is invalid!" in login_page.get_error_message()
 
 
-def test_only_username(page):
+def test_only_username(page: Page):
     """
     Test submitting login form with only username filled.
     Expect an error indicating invalid password.
@@ -84,7 +84,7 @@ def test_only_username(page):
     assert "Your password is invalid!" in login_page.get_error_message()
 
 
-def test_only_password(page):
+def test_only_password(page: Page):
     """
     Test submitting login form with only password filled.
     Expect an error indicating invalid username.
@@ -99,7 +99,7 @@ def test_only_password(page):
     assert "Your username is invalid!" in login_page.get_error_message()
 
 
-def test_special_characters_in_credentials(page):
+def test_special_characters_in_credentials(page: Page):
     """
     Test login with special characters in username and password.
     Verify system handles special characters gracefully.
@@ -115,7 +115,7 @@ def test_special_characters_in_credentials(page):
     assert login_page.is_error_visible()
 
 
-def test_very_long_credentials(page):
+def test_very_long_credentials(page: Page):
     """
     Test login with very long username and password strings.
     Verify system handles large input gracefully.
@@ -131,7 +131,7 @@ def test_very_long_credentials(page):
     assert login_page.is_error_visible()
 
 
-def test_credentials_with_leading_trailing_spaces(page):
+def test_credentials_with_leading_trailing_spaces(page: Page):
     """
     Test login with username and password containing leading/trailing spaces.
     Expect login failure, spaces are not trimmed.
