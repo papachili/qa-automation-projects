@@ -34,6 +34,7 @@ Key features:
 playwright-python/
 ├── pages/
 │ ├── checkboxes_page.py # Page Object for the checkboxes page
+│ ├── drag_and_drop_page.py # Page Object for the drag and drop page
 │ ├── dropdown_page.py # Page Object for the dropdown page
 │ ├── dynamic_loading_page.py # Page Object for the dynamic loading page
 │ ├── hovers_page.py # Page Object for the hovers page
@@ -42,6 +43,7 @@ playwright-python/
 ├── tests/
 │ ├── conftest.py # Shared pytest configuration for browser and page fixtures
 │ ├── test_checkboxes.py # Test script for checkboxes functionality
+│ ├── test_drag_and_drop.py # Test script for drag and drop functionality
 │ ├── test_dropdown.py # Test script for dropdown functionality
 │ ├── dynamic_loading.py # Test script for dynamic loading functionality
 │ ├── test_hovers.py # Test script for hover functionality
