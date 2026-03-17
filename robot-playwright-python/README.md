@@ -25,7 +25,9 @@ Key features:
 
 - Use of **Page Object Model (POM)** for maintainability
 - **Keyword-driven** test design using `.resource` files
-- Testing alerts, forms, navigation, dynamic content, and more
+- Testing alerts, form validation, and boundary value analysis
+- Bug identification and documentation using `[Tags]    bug`
+- JavaScript injection for testing restricted input fields
 - Modular, reusable keyword structure
 - HTML reports generated automatically after each test run
 
@@ -36,14 +38,19 @@ Key features:
 ```plaintext
 robot-playwright-python/
 ├── tests/
-│   └── alerts.robot                      # Tests for JavaScript alert dialogs
+│   ├── alerts.robot                          # Tests for JavaScript alert dialogs
+│   └── js_validation.robot                   # Tests for JavaScript form validation
 ├── resources/
+│   ├── keywords/
+│   │   ├── alerts_keywords.resource          # Keywords specific to alerts page
+│   │   └── js_validation_keywords.resource   # Keywords specific to JS validation page
 │   ├── variables/
-│   │   └── common_variables.resource     # URLs, browser settings, shared vars
+│   │   └── common_variables.resource         # URLs, browser settings, shared vars
 │   └── page_objects/
-│       └── alerts_page.resource          # Locators for the alerts page
-├── test-results/                         # Auto-generated test reports (git-ignored)
-├── requirements.txt                      # Python dependencies
+│       ├── alerts_page.resource              # Locators for the alerts page
+│       └── js_validation_page.resource       # Locators for the JS validation page
+├── test-results/                             # Auto-generated test reports (git-ignored)
+├── requirements.txt                          # Python dependencies
 ├── .gitignore
 └── README.md
 ```
@@ -94,10 +101,16 @@ robot --outputdir test-results tests/
 robot --outputdir test-results tests/alerts.robot
 ```
 
-### Run by tag (TODO)
+### Run a specific test case
 
 ```powershell
-robot --outputdir test-results --include smoke tests/
+robot --outputdir test-results -t "Test Name Here" tests/
+```
+
+### Run by tag
+
+```powershell
+robot --outputdir test-results --include bug tests/
 ```
 
 ### Run in headless mode
@@ -137,30 +150,75 @@ Keywords that interact with a page are stored in `resources/keywords/`, making t
 
 ### Example usage:
 
-###### alerts_page.resource
+###### js_validation_page.resource
 
 ```robotframework
 *** Settings ***
 Library    Browser
 
 *** Variables ***
-${ALERT_BUTTON}      id=alertexamples
-${ALERT_RESULT}      id=alertexplanation
-${CONFIRM_BUTTON}    id=confirmexample
-${CONFIRM_RETURN}    id=confirmreturn
-${CONFIRM_RESULT}    id=confirmexplanation
-${PROMPT_BUTTON}     id=promptexample
-${PROMPT_RETURN}     id=promptreturn
-${PROMPT_RESULT}     id=promptexplanation
-
+${FIELD_1}          id=lteq30a
+${FIELD_2}          id=lteq30b
+${ERROR_1}          id=lteq30aerror
+${ERROR_2}          id=lteq30berror
+${SUBMIT_BUTTON}    css=[name="submitbutton"]
+${CLEAR_BUTTON}     css=[name="clearbutton"]
+${RESULTS}          id=rendered-form-results
+${VALUE_1}          id=_valuevalue1
+${VALUE_2}          id=_valuevalue2
 ```
 
-###### alerts.robot
+###### js_validation_keywords.resource
 
 ```robotframework
 *** Settings ***
 Library     Browser
-Resource    ../resources/page_objects/alerts_page.resource
+Resource    ../page_objects/js_validation_page.resource
+Resource    ../variables/common_variables.resource
+
+*** Keywords ***
+
+Open Validation Page
+    New Page    ${BASE_URL}/pages/forms/javascript-validation/
+
+Submit Forms With Values
+    [Arguments]    ${value1}    ${value2}
+    ${value1}=    Convert To String    ${value1}
+    ${value2}=    Convert To String    ${value2}
+    Fill Text    ${FIELD_1}    ${value1}
+    Fill Text    ${FIELD_2}    ${value2}
+    Click    ${SUBMIT_BUTTON}
+
+Set Field Value Via JavaScript
+    [Arguments]    ${locator}    ${value}
+    Evaluate JavaScript    ${locator}    (el) => el.value = '${value}'
+
+Verify Validation Errors Shown
+    Get Text    ${ERROR_1}    contains    less than 30
+    Get Text    ${ERROR_2}    contains    less than 30
+
+Verify Results Visible With Values
+    [Arguments]    ${expected_val1}    ${expected_val2}
+    ${expected_val1}=    Convert To String    ${expected_val1}
+    ${expected_val2}=    Convert To String    ${expected_val2}
+    Get Element States    ${RESULTS}    validate    visible
+    ${actual1}=    Get Text    ${VALUE_1}
+    ${actual2}=    Get Text    ${VALUE_2}
+    Should Be Equal    ${actual1}    ${expected_val1}
+    Should Be Equal    ${actual2}    ${expected_val2}
+
+Verify No Errors Shown
+    Get Element States    ${ERROR_1}    validate    value & hidden
+    Get Element States    ${ERROR_2}    validate    value & hidden
+```
+
+###### js_validation.robot
+
+```robotframework
+*** Settings ***
+Library     Browser
+Resource    ../resources/keywords/js_validation_keywords.resource
+Resource    ../resources/page_objects/js_validation_page.resource
 Resource    ../resources/variables/common_variables.resource
 
 Suite Setup     New Browser    ${BROWSER}    headless=False
@@ -168,12 +226,17 @@ Suite Teardown  Close Browser
 
 *** Test Cases ***
 
-Alert Dialog Is Displayed And Accepted
-    New Page    ${BASE_URL}/pages/basics/alerts-javascript/
-    Handle Future Dialogs    action=accept
-    Click    ${ALERT_BUTTON}
-    Get Text    ${ALERT_RESULT}    contains    alert dialog
+Both Fields Valid Values Show Correct Values And No Errors
+    Open Validation Page
+    Submit Forms With Values    0    29
+    Verify Results Visible With Values    0    29
+    Verify No Errors Shown
 
+Both Fields Values Equal To 30 Are Accepted Bug
+    [Tags]    bug
+    Open Validation Page
+    Submit Forms With Values    30    30
+    Verify Validation Errors Shown
 ```
 
 ---
