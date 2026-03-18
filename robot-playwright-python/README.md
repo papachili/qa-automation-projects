@@ -35,20 +35,24 @@ Key features:
 
 ## Test Structure
 
+
 ```plaintext
 robot-playwright-python/
 ├── tests/
 │   ├── alerts.robot                          # Tests for JavaScript alert dialogs
+│   ├── cookie_login.robot                    # Tests for cookie-controlled login/logout flows
 │   └── js_validation.robot                   # Tests for JavaScript form validation
 ├── resources/
 │   ├── keywords/
 │   │   ├── alerts_keywords.resource          # Keywords specific to alerts page
-│   │   └── js_validation_keywords.resource   # Keywords specific to JS validation page
+│   │   ├── js_validation_keywords.resource   # Keywords specific to JS validation page
+│   │   └── login_keywords.resource           # Keywords specific to login/logout flows
 │   ├── variables/
 │   │   └── common_variables.resource         # URLs, browser settings, shared vars
 │   └── page_objects/
 │       ├── alerts_page.resource              # Locators for the alerts page
-│       └── js_validation_page.resource       # Locators for the JS validation page
+│       ├── js_validation_page.resource       # Locators for the JS validation page
+│       └── login_page.resource               # Locators for the login page
 ├── test-results/                             # Auto-generated test reports (git-ignored)
 ├── requirements.txt                          # Python dependencies
 ├── .gitignore
