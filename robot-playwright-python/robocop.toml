@@ -1,0 +1,5 @@
+[robocop]
+exclude = [
+    "missing-doc-test-case",
+    "missing-doc-keyword",
+]
