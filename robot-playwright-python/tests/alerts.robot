@@ -1,13 +1,13 @@
 *** Settings ***
-Library     Browser
-Resource    ../resources/page_objects/alerts_page.resource
-Resource    ../resources/variables/common_variables.resource
+Library             Browser
+Resource            ../resources/page_objects/alerts_page.resource
+Resource            ../resources/variables/common_variables.resource
 
-Suite Setup     New Browser    ${BROWSER}    headless=False
-Suite Teardown  Close Browser
+Suite Setup         New Browser    ${BROWSER}    headless=False
+Suite Teardown      Close Browser
+
 
 *** Test Cases ***
-
 Alert Dialog Is Displayed And Accepted
     New Page    ${BASE_URL}/pages/basics/alerts-javascript/
     Handle Future Dialogs    action=accept

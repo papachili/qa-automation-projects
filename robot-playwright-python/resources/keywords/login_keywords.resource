@@ -3,16 +3,16 @@ Library     Browser
 Resource    ../page_objects/login_page.resource
 Resource    ../variables/common_variables.resource
 
-*** Keywords ***
 
+*** Keywords ***
 Open Login Page
     New Page    ${LOGIN_PAGE_URL}
 
 Login As
     [Arguments]    ${username}    ${password}
-    Fill Text      ${USERNAME_FIELD}    ${username}
-    Fill Text      ${PASSWORD_FIELD}    ${password}
-    Click          ${LOGIN_BUTTON}
+    Fill Text    ${USERNAME_FIELD}    ${username}
+    Fill Text    ${PASSWORD_FIELD}    ${password}
+    Click    ${LOGIN_BUTTON}
 
 Verify Redirected To Admin View
     Get Url    ==    ${ADMIN_VIEW_URL}

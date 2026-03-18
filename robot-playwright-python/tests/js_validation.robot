@@ -1,14 +1,14 @@
 *** Settings ***
-Library     Browser
-Resource    ../resources/keywords/js_validation_keywords.resource
-Resource    ../resources/page_objects/js_validation_page.resource
-Resource    ../resources/variables/common_variables.resource
+Library             Browser
+Resource            ../resources/keywords/js_validation_keywords.resource
+Resource            ../resources/page_objects/js_validation_page.resource
+Resource            ../resources/variables/common_variables.resource
 
-Suite Setup     New Browser    ${BROWSER}    headless=False
-Suite Teardown  Close Browser
+Suite Setup         New Browser    ${BROWSER}    headless=False
+Suite Teardown      Close Browser
+
 
 *** Test Cases ***
-
 Both Fields Submit With Empty Show Validation Errors
     Open Validation Page
     Click    ${SUBMIT_BUTTON}
@@ -49,7 +49,7 @@ Both Fields Valid Values Show Correct Values And No Errors
     Submit Forms With Values    0    29
     Verify Results Visible With Values    0    29
     Verify No Errors Shown
-    
+
 Both Fields Values Equal To 30 Are Accepted Bug
     [Tags]    bug
     Open Validation Page
@@ -63,8 +63,8 @@ Both Fields Values Greater Than 30 Show Validation Error
 
 Both Fields Negative Values Show Correct Values
     Open Validation Page
-    Submit Forms With Values    -1   -100
-    Verify Results Visible With Values    -1   -100
+    Submit Forms With Values    -1    -100
+    Verify Results Visible With Values    -1    -100
     Verify No Errors Shown
 
 Both Fields Valid Values Show Correct Values & No Errors Then Clear Results And Repeat
@@ -96,5 +96,4 @@ First Fields Non-numerical Second Valid Show Validation Error
     Click    ${SUBMIT_BUTTON}
     Get Element States    ${RESULTS}    validate    detached
     Get Text    ${ERROR_1}    contains    less than 30
-    Get Element States    ${ERROR_2}    validate    value & hidden  
-
+    Get Element States    ${ERROR_2}    validate    value & hidden

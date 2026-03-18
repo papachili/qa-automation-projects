@@ -1,14 +1,14 @@
 *** Settings ***
-Library     Browser
-Resource    ../resources/page_objects/login_page.resource
-Resource    ../resources/keywords/login_keywords.resource
-Resource    ../resources/variables/common_variables.resource
+Library             Browser
+Resource            ../resources/page_objects/login_page.resource
+Resource            ../resources/keywords/login_keywords.resource
+Resource            ../resources/variables/common_variables.resource
 
-Suite Setup     New Browser    ${BROWSER}    headless=False
-Suite Teardown  Close Browser
+Suite Setup         New Browser    ${BROWSER}    headless=False
+Suite Teardown      Close Browser
+
 
 *** Test Cases ***
-
 Admin Valid Login Redirects To Admin View
     Open Login Page
     Login As    Admin    AdminPass
@@ -47,14 +47,14 @@ Already Logged In Admin Redirects Away From Login Page
     Open Login Page
     Login As    Admin    AdminPass
     Verify Redirected To Admin View
-    Click   ${GO_LOGIN_BUTTON}
+    Click    ${GO_LOGIN_BUTTON}
     Verify Redirected To Admin View
 
 Already Logged In Super Admin Redirects Away From Login Page
     Open Login Page
     Login As    SuperAdmin    AdminPass
     Verify Redirected To Super Admin View
-    Click   ${GO_LOGIN_BUTTON}
+    Click    ${GO_LOGIN_BUTTON}
     Verify Redirected To Super Admin View
 
 Test Navbar as Admin
@@ -110,9 +110,9 @@ Tampered Cookie Value Redirects To Login Page
     Verify On Login Page
 
 Remember Me Checkbox Has No Effect
-    [Tags]    bug
     [Documentation]    Remember me checkbox can be toggled but has no visible
     ...               effect on cookie expiry or session persistence
+    [Tags]    bug
     Open Login Page
     Click    ${REMEMBER_ME_CHECKBOX}
     Click    ${REMEMBER_ME_CHECKBOX}

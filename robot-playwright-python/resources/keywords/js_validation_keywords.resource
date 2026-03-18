@@ -3,8 +3,8 @@ Library     Browser
 Resource    ../page_objects/js_validation_page.resource
 Resource    ../variables/common_variables.resource
 
-*** Keywords ***
 
+*** Keywords ***
 Open Validation Page
     New Page    ${BASE_URL}/pages/forms/javascript-validation/
 
